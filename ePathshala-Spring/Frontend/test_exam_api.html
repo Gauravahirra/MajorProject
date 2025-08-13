@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        button { padding: 10px 20px; margin: 5px; }
+        pre { background-color: #f8f9fa; padding: 10px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>Exam API Test</h1>
+    
+    <div class="test-section">
+        <h2>1. Test Exam Creation</h2>
+        <button onclick="testCreateExam()">Create Test Exam</button>
+        <div id="createResult"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. Test Get Faculty Exams</h2>
+        <button onclick="testGetExams()">Get Faculty Exams</button>
+        <div id="getExamsResult"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8081';
+        const TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWFjaGVyMUBlcGF0aHNoYWxhLmNvbSIsInJvbGUiOiJURUFDSEVSIiwiZXhwIjoxNzU0NDg2ODA2LCJpYXQiOjE3NTQ0NTA4MDZ9.eTSVQrNc8FmAgvT4yk6DPzv0a5dwZHWxCbxhE05ukA8';
+
+        async function apiCall(url, options = {}) {
+            const config = {
+                ...options,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${TOKEN}`,
+                    ...options.headers,
+                },
+            };
+
+            const response = await fetch(`${API_BASE}${url}`, config);
+            
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ error: 'Network error' }));
+                throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`);
+            }
+
+            return response.json();
+        }
+
+        async function testCreateExam() {
+            const resultDiv = document.getElementById('createResult');
+            resultDiv.innerHTML = '<p>Creating exam...</p>';
+            
+            try {
+                const examData = {
+                    title: "Test Java Fundamentals Exam",
+                    description: "Test exam for API verification",
+                    durationMinutes: 30,
+                    startTime: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // Tomorrow
+                    endTime: new Date(Date.now() + 25 * 60 * 60 * 1000).toISOString(), // Tomorrow + 1 hour
+                    totalMarks: 50,
+                    negativeMarking: false,
+                    negativeMarkingPercentage: 0,
+                    isActive: true,
+                    courseId: 101,
+                    courseName: "Java Programming",
+                    questions: [
+                        {
+                            questionText: "What is the output of: System.out.println(10 + 20)?",
+                            optionA: "30",
+                            optionB: "1020",
+                            optionC: "Error",
+                            optionD: "None of the above",
+                            correctAnswer: "A",
+                            marks: 5,
+                            difficulty: "Easy",
+                            topic: "Operators"
+                        }
+                    ]
+                };
+
+                console.log('Sending exam data:', examData);
+                const response = await apiCall('/api/faculty/exams', {
+                    method: 'POST',
+                    body: JSON.stringify(examData)
+                });
+
+                resultDiv.className = 'test-section success';
+                resultDiv.innerHTML = `
+                    <h3>✅ Exam Created Successfully!</h3>
+                    <pre>${JSON.stringify(response, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.className = 'test-section error';
+                resultDiv.innerHTML = `
+                    <h3>❌ Error Creating Exam</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                    <pre>${error.stack}</pre>
+                `;
+            }
+        }
+
+        async function testGetExams() {
+            const resultDiv = document.getElementById('getExamsResult');
+            resultDiv.innerHTML = '<p>Fetching exams...</p>';
+            
+            try {
+                const response = await apiCall('/api/faculty/exams', {
+                    method: 'GET'
+                });
+
+                resultDiv.className = 'test-section success';
+                resultDiv.innerHTML = `
+                    <h3>✅ Exams Retrieved Successfully!</h3>
+                    <p><strong>Count:</strong> ${Array.isArray(response) ? response.length : 'Not an array'}</p>
+                    <pre>${JSON.stringify(response, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.className = 'test-section error';
+                resultDiv.innerHTML = `
+                    <h3>❌ Error Getting Exams</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                    <pre>${error.stack}</pre>
+                `;
+            }
+        }
+    </script>
+</body>
+</html> 
