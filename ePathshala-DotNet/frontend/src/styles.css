@@ -1,0 +1,294 @@
+/* Global styles to enhance the appearance of the Student ERP frontend
+
+
+body {
+  background-color: #f5f7fa;
+}
+
+
+.card {
+  border: none;
+  border-radius: 0.75rem;
+}
+
+
+.card-title {
+  font-weight: 600;
+}
+
+
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid #e9ecef;
+}
+
+
+.badge-status-pending {
+  background-color: #ffc107;
+}
+
+.badge-status-approved {
+  background-color: #198754;
+}
+
+.badge-status-rejected {
+  background-color: #dc3545;
+}
+.btn-primary{
+    background-color: #2d538c;;
+} */
+
+/* ====== Theme: Professional Purple ====== */
+
+/* === Palette: purple-pink + off-white (home light) === */
+:root{
+  --brand-offwhite: #faf7fb;        /* soft off-white */
+  --brand-primary:  #8a2b6a;        /* purple-pink (main) */
+  --brand-grad-start: #5f2948;      /* deep plum (from your reference) */
+  --brand-grad-end:   #b04b8c;      /* brighter pink-purple */
+  --brand-border: #e8e2ed;
+}
+
+/* Public pages (Home, About, Contact, Login) stay light */
+body {
+  background-color: var(--brand-offwhite);
+  color: #212529;
+  background-color: #fff2d6;
+}
+
+
+/* Bootstrap-safe variables */
+/* body {
+  background-color: var(--brand-bg);
+  color: var(--brand-text);
+} */
+
+/* Public sections (Home, Login, etc.) use light background */
+/* body {
+  background-color: #f8f9fa;
+  color: #212529;
+} */
+
+/* Instead, scope dark dashboard theme */
+/* .dashboard-theme {
+  background-color: var(--brand-bg);
+  color: var(--brand-text);
+} */
+.dashboard-theme{
+  background-color: #0f0b1a;
+  color: #e9e8f5;
+}
+
+/* Primary accents */
+.text-primary { color: var(--brand-primary) !important; }
+.btn-primary {
+  background: linear-gradient(90deg, var(--brand-grad-start), var(--brand-grad-end)) !important;
+  border: none !important;
+}
+.btn-primary:hover {
+  filter: brightness(0.95);
+}
+
+/* Cards on light pages */
+.card {
+  background-color: #ffffff;
+  border: 1px solid var(--brand-border);
+  border-radius: .75rem;
+}
+.card-xl { min-height: 220px; border-radius: .85rem; }
+
+/* Subtle text */
+.text-body-secondary { color: #6c757d !important; }
+.text-body-tertiary { color: #98a2b3 !important; }
+
+/* Horizontal scroll rail for “Key Modules” */
+.h-scroll{
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+.h-scroll .tile{
+  display: inline-block;
+  width: 280px;
+  min-height: 120px;
+  border-radius: .75rem;
+  scroll-snap-align: start;
+}
+
+
+.card {
+  background-color: #fff;
+  border: 1px solid var(--brand-border);
+  border-radius: .75rem;
+}
+.navbar,
+.bg-primary {
+  background-color: var(--brand-surface) !important;
+}
+
+.form-control, .form-select {
+  color: var(--brand-text) !important;
+  border-color: var(--brand-border) !important;
+}
+.form-control:focus, .form-select:focus {
+  box-shadow: 0 0 0 .25rem rgba(108,92,231,.25) !important;
+  border-color: var(--brand-primary) !important;
+}
+.text-muted { color: var(--brand-text-muted) !important; }
+.border-soft { border: 1px solid var(--brand-border); border-radius: .75rem; }
+.link-accent { color: var(--brand-accent); }
+
+
+
+.navbar-custom {
+  background: linear-gradient(90deg, var(--brand-grad-start), var(--brand-grad-end));
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link,
+.navbar-custom .navbar-toggler-icon {
+  color: #ffffff !important;
+}
+.navbar-custom .nav-link:hover {
+  color: #d1d5db !important; 
+}
+
+/* Footer styling */
+.footer-custom {
+  background: linear-gradient(90deg, var(--brand-grad-start), var(--brand-grad-end));
+  color: #e5e7eb; /* soft gray */
+}
+.footer-custom a {
+  color: #ffffff;
+  text-decoration: none;
+}
+.footer-custom a:hover {
+  color: #d1d5db;
+}
+
+
+
+:root{
+  --admin-surface-strong: #fff2d6;       
+  --admin-border: #f2e6c9;
+  --brand-primary:  #8a2b6a;
+  --brand-grad-start: #5f2948;
+  --brand-grad-end: #b04b8c;
+}
+
+
+
+/* Sidebar links styling */
+.admin-sidelink{
+  color: #4b4b4b !important;
+  border-radius: .5rem;
+  /* padding: .5rem .75rem; */
+}
+.admin-sidelink:hover{ background-color: rgba(0,0,0,.05); color: #111 !important; }
+.admin-sidelink.active{
+  background: linear-gradient(90deg, var(--brand-grad-start), var(--brand-grad-end));
+  color: #fff !important;
+}
+
+
+.admin-grid .card{
+  background: #ffffff;
+  border: 1px solid var(--admin-border);
+  border-radius: .75rem;
+}
+
+
+.form-control:focus, .form-select:focus{
+  box-shadow: 0 0 0 .25rem rgba(176,75,140,.25) !important;
+  border-color: var(--brand-grad-end) !important;
+}
+
+
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+:root{
+  --nav-h: 64px;
+  --footer-h: 0px;
+}
+.admin-grid{
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: calc(100svh - var(--nav-h, 64px) - var(--footer-h, 0px));
+  width: 100% !important;
+  
+  background: var(--admin-surface);
+}
+
+/* Sidebar pinned under navbar, fills down to footer */
+.admin-grid__sidebar{
+  position: sticky;
+  top: var(--nav-h, 64px);
+  align-self: start;
+  height: calc(100svh - var(--nav-h, 64px) - var(--footer-h, 0px));
+  overflow: auto;
+  background: var(--admin-surface-strong);
+  border-right: 1px solid var(--admin-border);
+   z-index: 2; 
+}
+
+/* Content fills the rest; scrolls vertically */
+.admin-grid__content{
+  min-height: calc(100svh - var(--nav-h, 64px) - var(--footer-h, 0px));
+  display: flex;            
+  flex-direction: column;
+  position: relative;       
+  z-index: 1;  
+  overflow: auto;   
+  pointer-events: auto;
+}
+
+body { padding-top: var(--nav-h); }
+
+
+.login-wrap{
+  min-height: calc(100svh - var(--nav-h) - var(--footer-h));
+  padding-top: clamp(16px, 4vh, 48px);
+  padding-bottom: clamp(16px, 4vh, 48px);
+  display: grid;
+  place-items: center;
+  background: var(--admin-surface);
+}
+
+.login-card{
+  border: 1px solid var(--admin-border);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.login-title{
+  background: linear-gradient(90deg, var(--brand-grad-start), var(--brand-grad-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.btn-brand{
+  background: linear-gradient(90deg, var(--brand-grad-start), var(--brand-grad-end));
+  border: none;
+  color: #fff;
+}
+.btn-brand:hover{ filter: brightness(1.03); }
+
+.form-control:focus, .form-select:focus{
+  box-shadow: 0 0 0 .25rem rgba(176,75,140,.25) !important;
+  border-color: var(--brand-grad-end) !important;
+}
+
+.page-screen{
+  min-height: calc(100svh - var(--nav-h) - var(--footer-h));
+  display: flex;
+  flex-direction: column;
+}
+
+.home-login{
+  width: 200px;
+}
+
